@@ -2,8 +2,8 @@ use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Note {
-    content: String,
-    author: String,
+    pub content: String,
+    pub author: String,
 }
 
 impl Note {
@@ -14,4 +14,3 @@ impl Note {
         }
     }
 }
-

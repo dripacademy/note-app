@@ -32,12 +32,9 @@ async fn get_notes() -> impl Responder {
     .body(notes)
 }
 
+// can only parse data if content type="application/x-www-form-urlencoded"
 #[post("/note")]
-async fn post_note(note: String) -> impl Responder {
-    // 1. parse the note from json or whatever
-    let note: Note = serde_json::from_str(&note).unwrap();
-    // 2. write it to database
-    // return ok if success
+async fn post_note(note: web::Form<Note>) -> impl Responder {
     println!("{:#?}", note);
 
     HttpResponse::Ok()
