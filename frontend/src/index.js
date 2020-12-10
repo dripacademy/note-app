@@ -10,7 +10,23 @@ class Hello extends React.Component {
   }
 }
 
+class InputField extends React.Component {
+    render() {
+        return (
+            <input
+                name="note"
+                id="note"
+                type="text"
+                minlength="3"
+                maxlength="255"
+                size="16"
+                placeholder="please enter your note here."
+            ></input>
+        );
+    }
+}
+
 ReactDOM.render(
-    <Hello/>,
+    <InputField/>,
   document.getElementById('root')
 );
