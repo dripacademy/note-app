@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+// rust backend server
+window.$server = "localhost:8080";
+
 class Hello extends React.Component {
   render() {
     return (
@@ -26,7 +29,21 @@ class InputField extends React.Component {
     }
 }
 
+class NoteForm extends React.Component {
+    render() {
+        // endpoint
+        const address = window.$server + "/note";
+
+        return (
+        <form action={address} method="POST">
+            <InputField/>
+            <input type="submit" value="write note."/>
+        </form>
+        );
+    }
+}
+
 ReactDOM.render(
-    <InputField/>,
+    <NoteForm/>,
   document.getElementById('root')
 );
