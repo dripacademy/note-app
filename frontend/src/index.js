@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+/* GLOBAL VARIABLES */
 // rust backend server
 window.$server = "http://localhost:8080";
 
