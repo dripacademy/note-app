@@ -8,6 +8,7 @@ import {
 
 import Contact from './components/contact.jsx';
 import Home from './components/home.jsx';
+import NoteForm from './components/noteform.jsx';
 import './App.css';
 
 function App() {
@@ -30,11 +31,21 @@ function App() {
                         Contact
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink 
+                        to="/write" 
+                        activeClassName="selected">
+                        Write Note
+                        </NavLink>
+                    </li>
                 </ul>
                 </nav>
                 <Switch>
                     <Route path="/contact">
                         <Contact />
+                    </Route>
+                    <Route path="/write">
+                        <NoteForm />
                     </Route>
                     <Route path="/">
                         <Home />
