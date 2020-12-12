@@ -6,8 +6,8 @@ import {
     NavLink
 } from 'react-router-dom';
 
-import Contact from './components/Contact';
-import Home from './components/Home';
+import Contact from './components/contact.jsx';
+import Home from './components/home.jsx';
 import './App.css';
 
 function App() {

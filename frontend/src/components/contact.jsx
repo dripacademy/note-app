@@ -5,7 +5,7 @@ class Home extends Component {
         return (
             <div className="Contact">
             This is the contact page.
-            <a href="github.com/youngtrashbag">my github</a>
+            <a href="https://github.com/youngtrashbag">my github</a>
             </div>
         )
     }

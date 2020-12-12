@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import App from './App.js';
 
 /* GLOBAL VARIABLES */
 // rust backend server
@@ -78,6 +79,7 @@ class TestButton extends React.Component {
 }
 
 ReactDOM.render(
-    <TestButton/>,
+    /*<TestButton/>,*/
+    <App/>,
   document.getElementById('root')
 );

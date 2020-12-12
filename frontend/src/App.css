@@ -1,0 +1,19 @@
+.App > div{
+    margin-top: 40px;
+}  
+  
+.App > a {
+    color: white;
+}
+
+.App a.selected {
+    text-decoration: none;
+}
+
+.App > .Home {
+    color: red;
+}
+
+.App > .Contact {
+    color: white;
+}
