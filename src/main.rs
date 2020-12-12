@@ -38,4 +38,6 @@ async fn post_note(note: web::Form<Note>) -> impl Responder {
     println!("{:#?}", note);
 
     HttpResponse::Ok()
+    .header("Access-Control-Allow-Origin", "*")
+    .finish()
 }
