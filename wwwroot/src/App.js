@@ -9,6 +9,7 @@ import {
 import Contact from './components/contact.jsx';
 import Home from './components/home.jsx';
 import NoteForm from './components/noteform.jsx';
+import Notes from './components/note.jsx';
 import './App.css';
 
 function App() {
@@ -33,6 +34,13 @@ function App() {
                     </li>
                     <li>
                         <NavLink 
+                        to="/notes" 
+                        activeClassName="selected">
+                        Display Notes
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
                         to="/write" 
                         activeClassName="selected">
                         Write Note
@@ -44,8 +52,11 @@ function App() {
                     <Route path="/contact">
                         <Contact />
                     </Route>
+                    <Route path="/notes">
+                        <Notes/>
+                    </Route>
                     <Route path="/write">
-                        <NoteForm />
+                        <NoteForm/>
                     </Route>
                     <Route path="/">
                         <Home />
