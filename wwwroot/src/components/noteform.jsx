@@ -14,7 +14,7 @@ async function postNote(content, author) {
         }
     }).then(
         function (res) {
-            console.log(res.data);
+            //console.log(res.data);
         }
     ).catch(err => console.log("Axios err: ", err));
 

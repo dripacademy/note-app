@@ -4,17 +4,14 @@ import axios from 'axios';
 import "./note.css";
 
 async function getNotes() {
-    axios({
+    const promise = axios({
         method: "get",
         url: window.$server + '/note',
-    }).then(
-        function (res) {
-            console.log(res.data);
-            console.log(res.status);
-            console.log(res.statusText);
-            return res.data;
-        }
-    ).catch(err => console.log("Axios err: ", err));
+    }).catch(err => console.log("Axios err: ", err));
+
+    const dataPromise = promise.then(res => res.data)
+
+    return dataPromise;
 }
 
 class Note extends Component {
@@ -32,19 +29,26 @@ class Note extends Component {
 }
 
 class Notes extends Component {
+    /*
+    constructor (props) {
+        super(props);
+        this.state = {
+        }
+    }
+    */
+
     render() {
-
-        var notes = getNotes();
+        var notes = getNotes().then(data => JSON.parse(JSON.stringify(data)));
         console.log(notes);
-        notes = JSON.parse(notes);
-        var rendered = "<h1>h1</h1>";
-
-        notes.forEach(element => {
-            rendered += <Note content={element.content} author={element.author}/>
-        });
+        var notes = [{content: "yers", author: "meW"}, {content: "sod", author: "mauth"}]
 
         return (
-            rendered
+            <div class="Notes">
+                {notes.map(i => {
+                    return <Note content={i.content} author={i.author}/>
+                })
+                }
+            </div>
         )
     }
 }
