@@ -23,12 +23,13 @@ async fn get_notes() -> impl Responder {
 
     let notes: [Note; 2] = [note1, note2];
     let notes: String = serde_json::to_string(&notes).unwrap();
-    let notes: String = "{".to_string() + &notes + &"}".to_string();
+    //let notes: String = "{".to_string() + &notes + &"}".to_string();
 
     // use a logger instead of println !!
     println!("somebody requested allda notes!");
 
     HttpResponse::Ok()
+    .header("Access-Control-Allow-Origin", "*")
     .content_type("application/json")
     .body(notes)
 }
