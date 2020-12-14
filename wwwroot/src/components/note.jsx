@@ -38,9 +38,9 @@ class Notes extends Component {
     */
 
     render() {
-        var notes = getNotes().then(data => JSON.parse(JSON.stringify(data)));
-        console.log(notes);
+        //var notes = getNotes().then(data => JSON.parse(JSON.stringify(data)));
         var notes = [{content: "yers", author: "meW"}, {content: "sod", author: "mauth"}]
+        console.log(notes);
 
         return (
             <div class="Notes">

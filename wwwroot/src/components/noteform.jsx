@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import {useFormik} from 'formik';
+import * as Yup from 'yup';
 
 import './noteform.css';
 
@@ -41,7 +42,19 @@ const NoteForm = () => {
             content: '',
             author: '',
         },
+        validationSchema: 
+            Yup.object({
+                content: Yup.string()
+                            .min(3, 'Must be 3 characters or more')
+                            .max(255, 'Must be 255 characters or less')
+                            .required('Required'),
+                author: Yup.string()
+                            .min(3, 'Must be 3 characters or more')
+                            .max(16, 'Must be 16 characters or less')
+                            .required('Required'),
+            }),
         onSubmit: values => {
+            postNote(values.content, values.author);
             alert(JSON.stringify(values, null, 2));
         },
     });
@@ -56,6 +69,7 @@ const NoteForm = () => {
             onChange={formik.handleChange}
             value={formik.values.content}
         />
+        <div>{formik.errors.content}</div>
         <label htmlFor="author">Author</label>
         <input
             id="author"
@@ -64,6 +78,7 @@ const NoteForm = () => {
             onChange={formik.handleChange}
             value={formik.values.author}
         />
+        <div>{formik.errors.author}</div>
         <button type="submit">Submit</button>
         </form>
     );
