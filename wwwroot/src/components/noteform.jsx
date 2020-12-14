@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import qs from 'qs';
+import {useFormik} from 'formik';
 
 import './noteform.css';
 
@@ -20,6 +21,7 @@ async function postNote(content, author) {
 
 }
 
+/*
 class NoteForm extends React.Component {
     render() {
         return (
@@ -30,6 +32,41 @@ class NoteForm extends React.Component {
         </div>
         );
     }
+}
+*/
+
+const NoteForm = () => {
+    const formik = useFormik({
+        initialValues: {
+            content: '',
+            author: '',
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+    });
+
+    return (
+        <form onSubmit={formik.handleSubmit}>
+        <label htmlFor="content">Content</label>
+        <input
+            id="content"
+            name="content"
+            type="content"
+            onChange={formik.handleChange}
+            value={formik.values.content}
+        />
+        <label htmlFor="author">Author</label>
+        <input
+            id="author"
+            name="author"
+            type="author"
+            onChange={formik.handleChange}
+            value={formik.values.author}
+        />
+        <button type="submit">Submit</button>
+        </form>
+    );
 }
 
 export default NoteForm;
