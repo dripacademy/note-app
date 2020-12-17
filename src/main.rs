@@ -1,15 +1,23 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use actix_session::{Session, CookieSession};
 use serde_json::{Result, Value};
 
 mod note;
 use note::*;
+mod user;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
+            .wrap(
+                CookieSession::signed(&[0; 32])
+                .name("actix_session")
+                .secure(true)
+            )
             .service(post_note)
             .service(get_notes)
+            .service(user::login)
     })
     .bind("127.0.0.1:8080")?
     .run()
