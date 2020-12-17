@@ -6,51 +6,39 @@ import {
     NavLink
 } from 'react-router-dom';
 
-import Contact from './components/contact.jsx';
-import Home from './components/home.jsx';
-import NoteForm from './components/noteform.jsx';
-import Notes from './components/note.jsx';
+import Home from './components/home';
+import NoteForm from './components/noteform';
+import Notes from './components/note';
+import Login from './components/login';
 import './App.css';
 
 function App() {
     return (
         <div className="App">
             <Router>
-                <nav>
-                <ul>
-                    <li>
-                        <NavLink 
-                        exact to="/" 
-                        activeClassName="selected">
-                        Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink 
-                        to="/contact" 
-                        activeClassName="selected">
-                        Contact
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink 
-                        to="/notes" 
-                        activeClassName="selected">
-                        Display Notes
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink 
-                        to="/write" 
-                        activeClassName="selected">
-                        Write Note
-                        </NavLink>
-                    </li>
-                </ul>
-                </nav>
+                <NavLink 
+                exact to="/" 
+                activeClassName="selected">
+                    Home
+                </NavLink>
+                <NavLink 
+                to="/login" 
+                activeClassName="selected">
+                    Login
+                </NavLink>
+                <NavLink 
+                to="/notes" 
+                activeClassName="selected">
+                    Display Notes
+                </NavLink>
+                <NavLink 
+                to="/write" 
+                activeClassName="selected">
+                    Write Note
+                </NavLink>
                 <Switch>
-                    <Route path="/contact">
-                        <Contact />
+                    <Route path="/login">
+                        <Login />
                     </Route>
                     <Route path="/notes">
                         <Notes/>
