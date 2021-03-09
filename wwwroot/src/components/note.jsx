@@ -1,53 +1,39 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
 
+import {getNotes} from "../api/note";
 import "./note.css";
 
-async function getNotes() {
-    const promise = axios({
-        method: "get",
-        url: window.$server + '/note',
-    }).catch(err => console.log("Axios err: ", err));
 
-    const dataPromise = promise.then(res => res.data)
-
-    return dataPromise;
+const Note = async (content, author) => {
+    return (
+        <div class="note">
+            <p class="content">
+                {this.props.content}
+            </p>
+            <p class="author">{this.props.author}</p>
+        </div>
+    )
 }
 
-class Note extends Component {
-    render() {
-        return (
-            <div class="note">
-                <p class="content">
-                    {this.props.content}
-                </p>
-                <p class="author">{this.props.author}</p>
-            </div>
+const Notes = async () => {
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState();
 
-        )
-    }
-}
+    useEffect(() => {
+        setData(getNotes());
+        setLoading(false);
+    }, []);
 
-class Notes extends Component {
-    /*
-    constructor (props) {
-        super(props);
-        this.state = {
-        }
-    }
-    */
-
-    render() {
-        //var notes = getNotes().then(data => JSON.parse(JSON.stringify(data)));
-        var notes = [{content: "yers", author: "meW"}, {content: "sod", author: "mauth"}]
-        console.log(notes);
-
+    if (isLoading) {
+        return <h1 className="loading">Loading...</h1>
+    } else {
+        var notes = [];
+        data.forEach((note) => {
+            notes.push(Note(note.content, note.author));
+        })
         return (
             <div class="Notes">
-                {notes.map(i => {
-                    return <Note content={i.content} author={i.author}/>
-                })
-                }
+                {notes}
             </div>
         )
     }

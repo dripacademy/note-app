@@ -12,3 +12,9 @@
     font-size: larger;
     color: darksalmon;
 }
+
+.loading {
+    transform: translateY(-15px);
+    display: inline-block;
+    animation: wave 2s ease-in-out infinite backwards;
+}

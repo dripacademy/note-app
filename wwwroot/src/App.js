@@ -7,9 +7,8 @@ import {
 } from 'react-router-dom';
 
 import Home from './components/home';
-import NoteForm from './components/noteform';
+import CreateNote from './components/create-note';
 import Notes from './components/note';
-import Login from './components/login';
 import './App.css';
 
 function App() {
@@ -22,11 +21,6 @@ function App() {
                     Home
                 </NavLink>
                 <NavLink 
-                to="/login" 
-                activeClassName="selected">
-                    Login
-                </NavLink>
-                <NavLink 
                 to="/notes" 
                 activeClassName="selected">
                     Display Notes
@@ -37,14 +31,11 @@ function App() {
                     Write Note
                 </NavLink>
                 <Switch>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
                     <Route path="/notes">
                         <Notes/>
                     </Route>
                     <Route path="/write">
-                        <NoteForm/>
+                        <CreateNote/>
                     </Route>
                     <Route path="/">
                         <Home />
