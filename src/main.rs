@@ -6,6 +6,8 @@ mod note;
 use note::*;
 mod user;
 
+// TODO: use sled (https://github.com/spacejam/sled)
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
