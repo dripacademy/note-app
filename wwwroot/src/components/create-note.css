@@ -6,9 +6,11 @@ h1 {
 input#content {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: green;
-    border-radius: 25px;
-    width: 500px;
-    height: 500px;
+    border-radius: 2px;
+    width: 20%;
+    max-width: 500px;
+    height: 10%;
+    max-height: 500px;
 }
 
 input#author {

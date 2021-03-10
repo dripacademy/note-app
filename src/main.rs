@@ -1,10 +1,9 @@
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
-use actix_session::{Session, CookieSession};
+use actix_web::{web, App, HttpResponse, HttpServer, middleware};
+use actix_cors::Cors;
 use serde_json::{Result, Value};
 
 mod note;
-use note::*;
-mod user;
+use note::{*};
 
 // TODO: use sled (https://github.com/spacejam/sled)
 
@@ -12,26 +11,24 @@ mod user;
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .wrap(
-                CookieSession::signed(&[0; 32])
-                .name("actix_session")
-                .secure(true)
-            )
-            .service(post_note)
-            .service(get_notes)
-            .service(user::login)
+            .wrap(Cors::permissive())
+            .wrap(middleware::DefaultHeaders::new().header("Content-Type", "application/json"))
+            .service(web::resource("/note")
+                .route(web::get().to(get_notes)))
+            .service(web::resource("/note")
+                .route(web::post().to(post_note)))
     })
-    .bind("127.0.0.1:8080")?
+    .bind("127.0.0.1:4001")?
     .run()
     .await
 }
 
-#[get("/note")]
-async fn get_notes() -> impl Responder {
+async fn get_notes() -> HttpResponse {
     let note1: Note = Note::new("yea whatever...".to_string(), "person1".to_string());
     let note2: Note = Note::new("yes, the second note".to_string(), "person2".to_string());
 
-    let notes: [Note; 2] = [note1, note2];
+    //let notes: [Note; 2] = [note1, note2];
+    let notes: Vec<Note> = vec![note1, note2];
     let notes: String = serde_json::to_string(&notes).unwrap();
     //let notes: String = "{".to_string() + &notes + &"}".to_string();
 
@@ -40,16 +37,13 @@ async fn get_notes() -> impl Responder {
 
     HttpResponse::Ok()
     .header("Access-Control-Allow-Origin", "*")
-    .content_type("application/json")
     .body(notes)
 }
 
 // can only parse data if content type="application/x-www-form-urlencoded"
-#[post("/note")]
-async fn post_note(note: web::Form<Note>) -> impl Responder {
+async fn post_note(note: web::Form<Note>) -> HttpResponse {
     println!("{:#?}", note);
 
     HttpResponse::Ok()
-    .header("Access-Control-Allow-Origin", "*")
     .finish()
 }

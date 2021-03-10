@@ -6,7 +6,7 @@ import {postNote} from "../api/note";
 import './create-note.css';
 
 const onSubmit = async (values) => {
-    const success = await postNote(values.content, values.author);
+    const success = await postNote(values);
     if (success) {
         alert("Successfully wrote note to db");
     } else {
@@ -30,11 +30,14 @@ const CreateNote = () => {
                             .required('Required')
                             .min(3, 'Must be 3 characters or more')
                             .max(16, 'Must be 16 characters or less'),
-            })
+            }),
+        onSubmit: ((values) => {
+            onSubmit(values);
+        })
     });
 
     return (
-        <form onSubmit={onSubmit(formik.values)}>
+        <form onSubmit={formik.handleSubmit}>
         <label htmlFor="content">Content</label>
         <input
             id="content"
