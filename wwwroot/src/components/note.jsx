@@ -8,9 +8,9 @@ const Note = (content, author) => {
     return (
         <div class="note">
             <p class="content">
-                {this.props.content}
+                {content}
             </p>
-            <p class="author">{this.props.author}</p>
+            <p class="author">{author}</p>
         </div>
     )
 }
